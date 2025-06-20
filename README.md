@@ -10,8 +10,10 @@ The original code hase been modified only where strictly necessary in order to f
    ### calcpar.f90 and calcpar_nest.f90
   In these subroutine the computation of the Cold Point Tropopause was added to the original version, which computed only the Lapse Rate Tropopause.
    ### timemanager_serial.f90  
-
    ### readinput.f90  
+   ### releaseparticles_reg.f90  
+   ### releaseparticles_irrreg.f90  
+   ### makefile.mom
    
 ## NEW SUBROUTINES
   ### 1 INTRUSION SUBROUTINES
