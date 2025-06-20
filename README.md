@@ -9,7 +9,10 @@ The original code hase been modified only where strictly necessary in order to f
 ## MODIFIED ORIGINAL SUBROUTINES
    ### calcpar.f90 and calcpar_nest.f90
   In these subroutine the computation of the Cold Point Tropopause was added to the original version, which computed only the Lapse Rate Tropopause.
-       
+   ### timemanager_serial.f90  
+
+   ### readinput.f90  
+   
 ## NEW SUBROUTINES
   ### 1 INTRUSION SUBROUTINES
    ***Aim:*** The main goal of this package of subroutines is to identify those air parcels entering the tropopause layer/stratosphere from the Planetary Bounary Layer (PBL)/Free Atmosphere (FA) or the PBL/FA from the             tropopause/stratosphere.For each identified particles, the computation of the following varibables is performed:
@@ -18,9 +21,9 @@ The original code hase been modified only where strictly necessary in order to f
    - other **thermodynamic variables** (e.g., Brunt-Vaisala frequency) to characterize the transport into the tropopause/stratosphere.
      
    ***Principal subroutines:***
-   - 1 *a1_boundaries_computation.f90*
-   - 2 *a1_thermodyn_computation.f90*
-   - 3...
+   - 1 *ai1_boundaries_computation.f90*
+   - 2 *ai1_thermodyn_computation.f90*
+   - 3 *ai1_up_intrusion_identifier.f90*
 
   ***Rationale:*** In order to identify those air parcels able to penetrate into the tropopause/stratosphere from the PBL/FA(or the other way round), their vertical positions are compared to the tropopause/pbl boundaries at                     each internal time step.
   ### ai1_boundaries_computation.f90
@@ -40,5 +43,16 @@ The original code hase been modified only where strictly necessary in order to f
   - Ellrond Index.
   Furthermore, it is computed also the tropography height at the particle position.
 
-  ### ai1_intrusion_identifier.f90
+  ### ai1_up_intrusion_identifier.f90
   ### 2 CONVECTIVE SUBROUTINES
+
+  ### 3 GENERAL SUBROUTINES
+   ***Aim:*** These subroutines are useful, for example, for handling the allocation of the additional variables required to implement the identification process.  
+   ***Principal subroutines:***  
+   - 1 *ai1_static_allocation.f90*  
+   - 2 *ai1_dynamic_allocation.f90*
+
+   ### ai1_static_allocation.f90  
+   It handles the static allocation of variable.  
+   ### ai1_dynamic_allocation.f90  
+   It manages the dynamic allocation of variable.
