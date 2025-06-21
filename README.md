@@ -10,13 +10,12 @@ The aim of this package is, on the one hand, to provide the used code in the art
    ### intrus_mod.f90
   It is a module that contains all the new introduced variables used in the AirIntrusions Package.
 ## MODIFIED ORIGINAL SUBROUTINES
-   ### calcpar.f90 and calcpar_nest.f90
-  In these subroutine the computation of the Cold Point Tropopause was added to the original version, which computed only the Lapse Rate Tropopause.
-   ### timemanager_serial.f90  
-   ### readinput.f90  
-   The module "ai1_intrus_mdo" has been included in the subroutine.  
+   ### ai1_calcpar.f90 and ai1_calcpar_nest.f90
+  In these subroutine the computation of the Cold Point Tropopause was added to the original version, which computed only the Lapse Rate Tropopause. 
+   ### ai1_readinput.f90
+   The module "ai1_intrus_mod" has been included in the subroutine.  
    Several new variables have been added among those variables that must be read from the input file "flexwrf.input", hereafter they are listed:  
-   - 
+   - 5
    ### releaseparticles_reg.f90  
    ### releaseparticles_irrreg.f90  
    ### makefile.mom
