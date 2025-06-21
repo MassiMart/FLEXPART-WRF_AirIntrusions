@@ -49,10 +49,10 @@ The aim of this package is, on the one hand, to provide the used code in the art
    - other **thermodynamic variables** (e.g., Brunt-Vaisala frequency) to characterize the transport into the tropopause/stratosphere.
      
    ***Principal subroutines:***
-    1) *ai1_boundaries_computation.f90*
-    2) *ai1_thermodyn_computation.f90*
-    3) *ai1_up_intrusion_identifier.f90*
-
+   1) *ai1_boundaries_computation.f90*;
+   2) *ai1_thermodyn_computation.f90*;
+   3) *ai1_up_intrusion_identifier.f90*.
+      
   ***Rationale:*** In order to identify those air parcels able to penetrate into the tropopause/stratosphere from the PBL/FA(or the other way round), their vertical positions are compared to the tropopause/pbl boundaries at                     each internal time step.
   ### ai1_boundaries_computation.f90
   This subroutine computes the PBL height and the tropopause boundaries. The tropopause can be defined according to two different method:  
