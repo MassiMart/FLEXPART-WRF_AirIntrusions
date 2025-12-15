@@ -3,8 +3,8 @@ subroutine up_intrusion_identifier(jtime,jpart,xold,yold,zold,ll_index,mm_index)
   !*****************************************************************************
   !     This file is part of the AirIntrusion Package                          *
   !     This subroutine performs the identification of those parcels entering  *
-  !     the tropopause/stratosphere. It also computed some thermodynamic       *
-  !     variables at the particle position before it enter the tropopause/     *
+  !     the tropopause/stratosphere. It also computes some thermodynamic       *
+  !     variables at the particle position before it enters the tropopause/     *
   !     stratosphere.                                                          *
   !                                                                            *
   !     Additional required subroutines:                                       *
@@ -33,9 +33,9 @@ subroutine up_intrusion_identifier(jtime,jpart,xold,yold,zold,ll_index,mm_index)
   ! xold,yold,zold   (IN) "Memorized" old positions of the particle            *
   ! tropo_method     (IN) Index for choosing the tropopause boundaries         *
   !                       computation method                                   *
-  ! ll_index         (IN) Index used to access those array associated to       *
+  ! ll_index         (IN) Index used to access those arrays associated to       *
   !                       intrusions in the tropopause                         *
-  ! mm_index         (IN) Index used to access those array associated to       *
+  ! mm_index         (IN) Index used to access those arrays associated to       *
   !                       intrusions in the stratosphere                       *             
   !*****************************************************************************
 
@@ -219,7 +219,7 @@ subroutine up_intrusion_identifier(jtime,jpart,xold,yold,zold,ll_index,mm_index)
                   write(*,*) "npoint_id(jpart)", npoint_id(jpart)
                   write(*,*) "size(tl_particle_id)", size(tl_particle_id)
                   write(*,*) tl_particle_id
-                  write(*,*) "I AM IN PARTICLE ENTER THE TTL"
+                  write(*,*) "I AM A PARTICLE ENTERING THE TTL"
                   stop
               end if
                if(tl_particle_id(kk) == npoint_id(jpart)) then
@@ -302,7 +302,7 @@ subroutine up_intrusion_identifier(jtime,jpart,xold,yold,zold,ll_index,mm_index)
                  write(*,*) "kk index is greater than strato_particle_id"
                  write(*,*) "kk: ", kk
                  write(*,*) "strato_particle_id(jpart): ", strato_particle_id(kk)
-                 write(*,*) "I AM IN PARTICLE ENTER THE STRATOSPHERE"
+                 write(*,*) "I AM A PARTICLE ENTERING THE STRATOSPHERE"
                  stop
               end if
 
@@ -334,7 +334,7 @@ subroutine up_intrusion_identifier(jtime,jpart,xold,yold,zold,ll_index,mm_index)
             end if
         end if
              
-        !If the particle was for a crtain time in the ttl, its residence time there must be computed.
+        !If the particle was for a certain time in the TTL, its residence time there must be computed.
         if(tl_count_flag(jpart) > 0) then 
            kk = 0
            !Loop over all the previous elements of particle_id(l)
@@ -351,7 +351,7 @@ subroutine up_intrusion_identifier(jtime,jpart,xold,yold,zold,ll_index,mm_index)
                 write(*,*) "strato_count_flag",strato_count_flag(jpart)
                 write(*,*) "zold",zold,"tri_old",tri_old,"cold_tropo_old",cold_tropo_old
                 write(*,*) "ztra1", ztra1(jpart),"tri",tri,"cold_tropo",cold_tropo
-                write(*,*) "I AM IN PARTICLE ENTER THE STRATOSPHERE - COMPUTING TL RESIDENCE TIME"
+                write(*,*) "I AM A PARTICLE ENTERING THE STRATOSPHERE - COMPUTING TL RESIDENCE TIME"
                 stop
              end if
              !Finding array index location of the particle
@@ -523,7 +523,7 @@ subroutine up_intrusion_identifier(jtime,jpart,xold,yold,zold,ll_index,mm_index)
              write(*,*) "kk index is greater than strato_particle_id"
              write(*,*) "kk: ", kk
              write(*,*) "strato_particle_id(jpart): ", strato_particle_id(jpart)
-             write(*,*) "I AM IN PARTICLE REMAINS IN THE STRATO UNTIL END SIMULATION"
+             write(*,*) "I AM A PARTICLE THAT REMAINS IN THE STRATO UNTIL END SIMULATION"
              stop
           end if
           !Finding array index location of the particle
@@ -554,7 +554,7 @@ subroutine up_intrusion_identifier(jtime,jpart,xold,yold,zold,ll_index,mm_index)
                 kk = kk + 1
                 !Check that the particle was already present in tl_particle_id, if not stop.
                 if(kk .gt. size(tl_particle_id)) then
-                  write(*,*) "I AM IN PARTICLE REMAINS IN THE TTL UNTIL THEY ARE TERMINATED"
+                  write(*,*) "I AM A PARTICLE REMAINS IN THE TTL UNTIL THEY ARE TERMINATED"
                   write(*,*) "kk index is greater than tl_particle_id"
                   write(*,*) "kk: ", kk
                   write(*,*) "tl_particle_id(kk): "     , tl_particle_id(kk)
@@ -590,7 +590,7 @@ subroutine up_intrusion_identifier(jtime,jpart,xold,yold,zold,ll_index,mm_index)
               do
                 kk = kk + 1
                 if(kk .gt. size(strato_particle_id)) then
-                  write(*,*) "I AM IN PARTICLE REMAINS IN THE TTL UNTIL THEY ARE TERMINATED"
+                  write(*,*) "I AM A PARTICLE THAT REMAINS IN THE TTL UNTIL THEY ARE TERMINATED"
                   write(*,*) "kk index is greater than strato_particle_id"
                   write(*,*) "kk: ", kk, "size strato_particle_id", size(strato_particle_id)
                   write(*,*) "strato_particle_id(jpart): ", strato_particle_id(kk)
