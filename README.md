@@ -31,7 +31,7 @@ The aim of this package is, on the one hand, to provide the used code in the art
    The variable "tl_count_flag(ipart)" and "strato_count_flag(ipart) have been added and initialized to zero. These variables are used to count the number of times an air parcel enters the tropopause and stratosphere region, respectively. The variable "free_atm_antering_time(ipart) is initialized here to -999; it is used for computing the transition time from the PBL to the tropopause/stratosphere. 
    
    ### ai1_timemenager_serial.f90  
-   The module "ai1_intrus_mod" has been included in the subroutine.  
+   The module "ai1_intrus_mod" has been included in the subroutine.    
    In the variables declaration, addition of "integer :: ll_index, mm_index". These are array indeces for accessing the "tl_*" and "strato_*" array used in the identification process (see ai1_up_intrusion_identifier.f90).  
    Addition of a section where the *static_allocation_**.f90* subroutin is called to allocate several different arrays.  
    Then, "ll_index" and "mm_index" are initialized to 0 before entering the do loop over the time.  
@@ -42,11 +42,11 @@ The aim of this package is, on the one hand, to provide the used code in the art
    No main modifications, just a bug fixing in the definiton of the variables "xold" and "yold". They must be declared as REAL(kind=dp) and not just REAL. 
 
    ### ai1_outgrid_init_reg.f90 & ai1_outgrid_init_irreg.f90
-   The module "ai1_intrus_mod" has been included in the subroutine. 
+   The module "ai1_intrus_mod" has been included in the subroutine.   
    The allocation of several different new arrays has been added to these subroutines for handling the intrusions information.
 
    ### ai1_partoutput.f90
-   The module "ai1_intrus_mod" has been included in the subroutine.
+   The module "ai1_intrus_mod" has been included in the subroutine.  
    Addition of some variables for computing extra information to characterize the intrusions, such as cold point tropopause, kinetic energy, ellornd index, richardson number, etc.
 
    ### ai1_readpartpositions.f90
@@ -54,11 +54,11 @@ The aim of this package is, on the one hand, to provide the used code in the art
    No main modifications, just a bug fixing in the reading of the header file.
 
    ### ai1_readwind.f90 & ai1_readwind_nest.f90
-   The module "ai1_intrus_mod" has been included in the subroutine.
+   The module "ai1_intrus_mod" has been included in the subroutine.  
    Addition of the possibility to read the Turbulent Kinetic Energy and CAPE diretly from the Weather and Research Forecasting (WRF) model.
 
    ### ai1_verttransform.f90 & ai1_verttransform_nests.f90
-   The module "ai1_intrus_mod" has been included in the subroutine.
+   The module "ai1_intrus_mod" has been included in the subroutine.  
    Addition of the vertical interpolation of the CAPE variable.
    
    ### makefile.mom  
