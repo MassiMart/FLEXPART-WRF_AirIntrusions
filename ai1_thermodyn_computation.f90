@@ -6,7 +6,7 @@ subroutine thermodyn_computation(jtime,jpart,xold,yold,zold,&
   !*****************************************************************************
   !                                                                            *
   !     Computation of additional thermodynamical variables in order           *
-  !     to better depicts the trajectories of those particles entering         *
+  !     to better depict the trajectories of those particles entering         *
   !     the tropopause layer/stratosphere (in case of sources in the PBL)      *
   !     or the PBL (in case of sources located in the stratosphere.            *
   !     The additional computed variables are:                                 *
@@ -30,7 +30,7 @@ subroutine thermodyn_computation(jtime,jpart,xold,yold,zold,&
   ! jpart                 Index of the particle considered                     *
   ! xold,yold,zold        "Memorized" old positions of the particle            *
   ! par_index             row index representing one parcel                    *
-  ! cross_index           coloumn index representing the number of time the    *
+  ! cross_index           column index representing the number of time the    *
   !                       parcel entered the TL/Strato                         *
   ! intrusion_type        1 = intrusion into the TL; 2 = into the Strato       *
   !*****************************************************************************
@@ -327,7 +327,7 @@ subroutine thermodyn_computation(jtime,jpart,xold,yold,zold,&
             thetam = 0.5*(thetaprof(1)+thetaprof(2))
             !Brunt Vaisala Frequency
             bvfsqtraj_tl(par_index,crossing_index) = ga/thetam*(thetaprof(2)-thetaprof(1))/(height(indzp)-height(indz))
-            !Pressure reference fro Bulk Richardson Number and Brunt-Vaisala Frequency
+            !Pressure reference for Bulk Richardson Number and Brunt-Vaisala Frequency
             pptraj_tl(par_index,crossing_index)    = 0.5*(pp_parprof(1)+pp_parprof(2)) 
             if(pptraj_tl(par_index,crossing_index) > 100000) then
                write(*,*) "pp_parprof(1)", pp_parprof(1)
