@@ -18,19 +18,18 @@ The aim of this package is, on the one hand, to provide the used code in the art
    Several new variables have been added among those variables that must be read from the input file "flexwrf.input", hereafter they are listed:  
    
    - *"mquasilag"*, it is used to assign a source ID to each particle in order to associate them to their source. 0 = at each particle is assing an ID corresponding to one source; 1 = no source ID is assigned. NOTE: It is not a new variable of the AirIntrusions pacakge. It was already implemented in FLEXPART-WRF but the read command was not present in the subroutine.
-   - *"cape_option"*, it can be 1 or 0. 1 means to use the CAPE values, previously computed, present in the WRF files; 0 means to not consider the CAPE values. This command flag is used to activate the "convective analysis" of the intrusions (see convective_analysis.f90).
+   - *"cape_option"*, it can be 1 or 0. 1 means to use the CAPE values, previously computed, present in the WRF files; 0 means to not consider the CAPE values.
    - *"nresidenceclass"*, it sets the number of residence classes in which divide the results.
    - *"lresidence"*, it is an array containing the boundaries of each residence class (in seconds).
-   - *"source type"*, this flag is used to set the location of the surces.  1= soruces in the PBL, 0 sources in the stratosphere.
+   - *"source type"*, this flag is used to set the location of the surces.  1= soruces in the PBL, 0 sources in the stratosphere (only the option 1 has been tested).
    - *"tropo_method"*, this flag is used to activate one of the two method available to compute the tropopause boundaries. 1=Lapse Rate/Cold Point Tropopause, 0=Pressure surfaces (Fueaflistaler et al. 2009).
 
 **NOTE:** It is fundamental to add this command variables in the input file "flexwrf.input", otherwise you'll get an error during the run.
-   ### ai1_releaseparticles_reg.f90  
+   ### ai1_releaseparticles_reg.f90 &  ai1_releaseparticles_irreg.f90  
    The module "ai1_intrus_mod" has been included in the subroutine.  
    The variable "npoint_id(jpart)" has been added in order to assign a unique ID to each particle when *"mquasilag"* == 0. This ID is fundamental in order to identify those parcels enetring the tropopause/stratopshere or the surface.
-   ### ai1_releaseparticles_irrreg.f90  
-   The module "ai1_intrus_mod" has been included in the subroutine.  
-   The variable "npoint_id(jpart)" has been added in order to assign a unique ID to each particle when *"mquasilag"* == 0. This ID is fundamental in order to identify those parcels enetring the tropopause/stratopshere or the surface.  
+   The variable "tl_count_flag(ipart)" and "strato_count_flag(ipart) have been added and initialized to zero. These variables are used to count the number of times an air parcel enters the tropopause and stratosphere region, respectively. The variable "free_atm_antering_time(ipart) is initialized here to -999; it is used for computing the transition time from the PBL to the tropopause/stratosphere. 
+   
    ### ai1_timemenager_serial.f90  
    The module "ai1_intrus_mod" has been included in the subroutine.  
    In the variables declaration, addition of "integer :: ll_index, mm_index". These are array indeces for accessing the "tl_*" and "strato_*" array used in the identification process (see ai1_up_intrusion_identifier.f90).  
@@ -39,12 +38,34 @@ The aim of this package is, on the one hand, to provide the used code in the art
    Addition of the call to the subroutine *"ai1_up_intrusion_identifier.f90"* and to the subroutine *"ai1_intrusionoutput.f90"*  
    Addition of a deallocation statement to dischard all the new allocated arrays.
 
+   ### ai1_calcfluxes.f90
+   No main modifications, just a bug fixing in the definiton of the variables "xold" and "yold". They must be declared as REAL(kind=dp) and not just REAL. 
+
+   ### ai1_outgrid_init_reg.f90 & ai1_outgrid_init_irreg.f90
+   The module "ai1_intrus_mod" has been included in the subroutine. 
+   The allocation of several different new arrays has been added to these subroutines for handling the intrusions information.
+
+   ### ai1_partoutput.f90
+   The module "ai1_intrus_mod" has been included in the subroutine.
+   Addition of some variables for computing extra information to characterize the intrusions, such as cold point tropopause, kinetic energy, ellornd index, richardson number, etc.
+
+   ### ai1_readpartpositions.f90
+   This subroutine is used to re-start a simulation from a certain time step (warm start), hence FLEXPART-WRF needs to read the particle positions from its output files.
+   No main modifications, just a bug fixing in the reading of the header file.
+
+   ### ai1_readwind.f90 & ai1_readwind_nest.f90
+   The module "ai1_intrus_mod" has been included in the subroutine.
+   Addition of the possibility to read the Turbulent Kinetic Energy and CAPE diretly from the Weather and Research Forecasting (WRF) model.
+
+   ### ai1_verttransform.f90 & ai1_verttransform_nests.f90
+   The module "ai1_intrus_mod" has been included in the subroutine.
+   Addition of the vertical interpolation of the CAPE variable.
+   
    ### makefile.mom  
    In the definition of the "OBJECTS" variable, all the "ai1_*.o" object files have been included in order to produce the modified version of FLEXPART-WRF.  
    
-## NEW SUBROUTINES
-  ### 1 INTRUSION SUBROUTINES
-   ***Aim:*** The main goal of this package of subroutines is to identify those air parcels entering the tropopause layer/stratosphere from the Planetary Bounary Layer (PBL)/Free Atmosphere (FA) or the PBL/FA from the             tropopause/stratosphere.For each identified particles, the computation of the following variables is performed:
+## NEW SUBROUTINES - INTRUSION SUBROUTINES
+***Aim:*** The main goal of this package of subroutines is to identify those air parcels entering the tropopause layer/stratosphere from the Planetary Bounary Layer (PBL)/Free Atmosphere (FA) or the PBL/FA from the             tropopause/stratosphere (the latter is still in development).For each identified particles, the computation of the following variables is performed:
    - the **transition time** (namely, the time required by the particles to reach the tropopause/stratosphere from the Planetary Boundary Layer (PBL);  
    - the **residence time** in the tropopause/stratosphere;  
    - other **thermodynamic variables** (e.g., Brunt-Vaisala frequency) to characterize the transport into the tropopause/stratosphere.
@@ -61,7 +82,7 @@ The aim of this package is, on the one hand, to provide the used code in the art
    2) The two vertical boundaries are defined as pressure surface following the results reported in Fueglistaler et al. (2009); bottom bounday fix to 150 hPa, while the top one to 70 hPa.
 
   ### ai1_thermodyn_computation.f90
-  This subroutine computes several thermodynamic variables at the particle position; in our study it was used to calculate the values  at the particle position before it enters the tropopause/stratosphere (or the PBL/FA).  
+  This subroutine computes several thermodynamic variables at the particle position before it enters the tropopause/stratosphere.  
   The computed variables are:
   - Potential Vorticity;
   - Vertical Wind Speed;
@@ -70,7 +91,7 @@ The aim of this package is, on the one hand, to provide the used code in the art
   - Brunt-Vaisala Frequency (N);
   - Pressure Reference fro (Ri and N);
   - Ellrond Index.
-  Furthermore, it is computed also the tropography height at the particle position.
+  Furthermore, it is also computed the tropography height at the particle position.
 
   ### ai1_up_intrusion_identifier.f90  
   This subroutine performs the identification of those parcels entering the tropopause/stratosphere.  
@@ -93,30 +114,48 @@ The aim of this package is, on the one hand, to provide the used code in the art
     
 Then, the subroutine *ai1_thermodyn_computation.f90* is called in order to compute the thermodynamic variables associated to this parcel before its entrance in the TL.  
 Third, the computation of the parcel residence time is performed considering different scenarios:
- 1) the parcel continues moving upward and it enters the stratosphere. If then the parcel re-enters the TL from the stratosphere, its residence time is no more computed.
- 2) the parcel returns in the troposphere from the TL. It does not take into account those parcels that entered the stratosphere and then returned to the TL.
- 3) the parcel remains in the TL until the end of the simulation. It does not take into account those parcels that entered the stratosphere and then returned to the TL.
- 4) the parcel remains in the TL until it is terminated because it leaves the domain. It does not take into account those parcels that entered the stratosphere and then returned to the TL.
-
+ 1) the parcel continues moving upward and it enters the stratosphere;
+ 2) the parcel returns in the troposphere from the TL; 
+ 4) the parcel remains in the TL until the end of the simulation;
+ 5) the parcel remains in the TL until it is terminated because it leaves the domain.
+    
  **Brief explanation of how the intrusion into the stratosphere are identified**  
  The rationale is very similar to the one described for the TL, hence here only the differences are reported.  
  The computation of the parcel residence time is done considering three different scenarios:  
 
-   1) the parcel returns in the troposphere from the stratosphere.
-   2) the parcel remains in the stratosphere until the end of the simulation.
+   1) the parcel returns in the troposphere from the stratosphere;
+   2) the parcel remains in the stratosphere until the end of the simulation;
    3) the parcel remains in the stratosphere untile it is terminated.
+
 ### ai1_intrusionout.f90  
+The intrusion data are saved at the end of the simulation using this subroutine. 
+The air parcel intrusions into the TL/stratosphere are counted and divided into two fluxes: "first entrance into the layer" and "secondary entries into the layer"; the subroutine "*ai1_calccrossing.f90*" handles the computation and saves the data into ".txt" files.
+The Tl and stratopshere intrusion data are saved hourly in different files:
+- .txt files: "ttl_class*.txt" and "strato_class*.txt", the data are saved not on a regular grid;
+- binary files: "ttl_residence_class*" and "strato_residence_class*", the data are saved hourly on a regular grid.
 
+### ai1_calccrossing.g90
+Here the "tl_class*.txt" and "strato_class*.txt" files are filled in with the data.
+Then, the number of intrusions are calculated on a regular output grid; the computation is based on the original subroutine "calclfux.f90" of the FLEXPART-WRF model. Furthermore, the thermodynamical variables are also sum up for each grid point of the regular grid in order to get an avaregd value as output (done by the subroutine "*ai1_crossingoutput.f90*").
 
-  ### 2 CONVECTIVE SUBROUTINES
+### ai1_crossingoutput.f90
+The intrusions data are computed and saved on the binary files. For each grid point, the variables are:
+- Number of intrusions;
+- Mean entering time in the layer;
+- Average transition time from the PBL to the layer;
+- Average potential vorticity;
+- Average vertical wind speed;
+- Average Turbulent Kinetic Energy;
+- Average pressure;
+- Average Richardson number;
+- Average Ellrond index;
+- Average Brunt-Vaisala frequency;
+- Total mass of the substance considered in the layer.
 
-  ### 3 GENERAL SUBROUTINES
-   ***Aim:*** These subroutines are useful, for example, for handling the allocation of the additional variables required to implement the identification process.  
-   ***Principal subroutines:***  
-   - 1 *ai1_static_allocation_1d.f90* & *ai1_static_allocation_2d.f90*
-   - 2 *ai1_dynamic_allocation_1d.f90* & *ai1_static_allocation_2d.f90*
+### ai1_static_allocation_*.f90  
+It handles the static allocation of monodimensional array "*_1d.f90" and two dimensional one "*_2d.f90".  
+### ai1_dynamic_allocation_*.f90  
+It manages the dynamic allocation of monodimensional array "*_1d.f90" and two dimensional one "*_2d.f90". 
+ 
+   
 
-   ### ai1_static_allocation_*.f90  
-   It handles the static allocation of monodimensional array "*_1d.f90" and two dimensional one "*_2d.f90".  
-   ### ai1_dynamic_allocation_*.f90  
-   It manages the dynamic allocation of monodimensional array "*_1d.f90" and two dimensional one "*_2d.f90". 
