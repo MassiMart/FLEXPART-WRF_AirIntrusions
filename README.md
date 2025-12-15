@@ -152,10 +152,8 @@ The intrusions data are computed and saved on the binary files. For each grid po
 - Average Brunt-Vaisala frequency;
 - Total mass of the substance considered in the layer.
 
-### ai1_static_allocation_*.f90  
-It handles the static allocation of monodimensional array "*_1d.f90" and two dimensional one "*_2d.f90".  
-### ai1_dynamic_allocation_*.f90  
-It manages the dynamic allocation of monodimensional array "*_1d.f90" and two dimensional one "*_2d.f90". 
- 
-   
+### ai1_dynamic_allocation_multicross_.f90  
+This subroutine is an helper subroutine to dynamically allocate arrays. Specifically, it extends their second dimension that is associated to multiple intrusions into the TL/stratosphere.
 
+### ai1_dynamic_allocation_*.f90  
+This subroutine is an helper subroutine to dynamically allocate arrays. Specifically, it extends their first dimension that is associated to new intrusions into the TL/stratosphere.
