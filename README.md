@@ -155,5 +155,5 @@ The intrusions data are computed and saved on the binary files. For each grid po
 ### ai1_dynamic_allocation_multicross_.f90  
 This subroutine is an helper subroutine to dynamically allocate arrays. Specifically, it extends their second dimension that is associated to multiple intrusions into the TL/stratosphere.
 
-### ai1_dynamic_allocation_*.f90  
+### ai1_dynamic_allocation_newentry.f90  
 This subroutine is an helper subroutine to dynamically allocate arrays. Specifically, it extends their first dimension that is associated to new intrusions into the TL/stratosphere.
