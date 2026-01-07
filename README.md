@@ -155,8 +155,8 @@ The intrusions data are computed and saved on the binary files. For each grid po
 ### ai1_dynamic_allocation_multicross_.f90  
 This subroutine is an helper subroutine to dynamically allocate arrays. Specifically, it extends their second dimension that is associated to multiple intrusions into the TL/stratosphere.
 
-### Acknowledgements. 
-All authors were supported by GAČR project "Unravelling Subgrid-Scale Orography Effects on Composition in the Free Atmosphere (SCOPE)", 25-17683S in the final year of the study. Massimo Martina, Petr Šácha were supported by the JUNIOR STAR project n. 23-04921M “Unravelling climate impacts of atmospheric internal gravity waves” as well as Anahí Villalba Pradas in initial years of the study. Petr Šácha was also partly supported by the Charles University Research Centre program no. UNCE/24/SCI/005 and Massimo Martina by the GAUK project n°442325.
-
 ### ai1_dynamic_allocation_newentry.f90  
 This subroutine is an helper subroutine to dynamically allocate arrays. Specifically, it extends their first dimension that is associated to new intrusions into the TL/stratosphere.
+
+### Acknowledgements. 
+All authors were supported by GAČR project "Unravelling Subgrid-Scale Orography Effects on Composition in the Free Atmosphere (SCOPE)", 25-17683S in the final year of the study. Massimo Martina, Petr Šácha were supported by the JUNIOR STAR project n. 23-04921M “Unravelling climate impacts of atmospheric internal gravity waves” as well as Anahí Villalba Pradas in initial years of the study. Petr Šácha was also partly supported by the Charles University Research Centre program no. UNCE/24/SCI/005 and Massimo Martina by the GAUK project n°442325.
