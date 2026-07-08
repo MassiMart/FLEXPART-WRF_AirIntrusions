@@ -85,12 +85,12 @@ The aim of this package is, on the one hand, to provide the used code in the art
   This subroutine computes several thermodynamic variables at the particle position before it enters the tropopause/stratosphere.  
   The computed variables are:
   - Potential Vorticity;
-  - Vertical Wind Speed;
+  - Vertical Wind Speed (it needs to be checked);
   - Turbulent Kinetic Energy (TKE);
   - Bulk Richardson Number (Ri);
   - Brunt-Vaisala Frequency (N);
-  - Pressure Reference fro (Ri and N);
-  - Ellrond Index.
+  - Pressure Reference for (Ri and N);
+  - Ellrond Index (it needs to be checked).
   Furthermore, it is also computed the tropography height at the particle position.
 
   ### ai1_up_intrusion_identifier.f90  
@@ -144,11 +144,11 @@ The intrusions data are computed and saved on the binary files. For each grid po
 - Mean entering time in the layer;
 - Average transition time from the PBL to the layer;
 - Average potential vorticity;
-- Average vertical wind speed;
+- Average vertical wind speed (it needs to be checked);
 - Average Turbulent Kinetic Energy;
 - Average pressure;
 - Average Richardson number;
-- Average Ellrond index;
+- Average Ellrond index (it needs to be checked);
 - Average Brunt-Vaisala frequency;
 - Total mass of the substance considered in the layer.
 
