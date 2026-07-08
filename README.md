@@ -1,9 +1,9 @@
 # FLEXPART-WRF - Description of the new "AirIntrusions" package
-The AirIntrusions package is a modified version of some of the files forming the FLEXPART-WRF model (Brioude et al., 2013) developed in the article Martina et al. (yyyy), "The impact of orography on the troposphere-to-stratosphere transport during a typhoon event in the tropics.",xxxx.  
+The AirIntrusions package is a modified version of some of the files forming the FLEXPART-WRF model (Brioude et al., 2013) developed in the article Martina et al. (2026), "The impact of orography on the troposphere-to-stratosphere transport during a typhoon event in the tropics.".  
 The original files have been modified only where strictly necessary in order to facilitate the implementation of the changes for potentially new users. Therefore, the changes have been organized in additional subroutines that must be added to the native code.  
 In order to use the package, you need to download it and store its files in the same directory where the original FLEXPART-WRF code is hosted. All the files belonging to the AirIntrusions package are named as "ai1_*.f90", where "ai1" stands for "AirIntrusions package version 1".  
 Then, you need to use "ai1_make.mom" to compile the modified version of the program (NOTE: you need to remove from the directory all those ".o" files connected to the original version of files that have been modified, such as "timemanager_serial.o" since it has been modified in some part in this new package).  
-The aim of this package is, on the one hand, to provide the used code in the article Martina et al. (yyyy), on the other hand, to faciliate the use of the FLEXPART-WRF model to investigate the potential transport of tracers from the surface to the stratosphere.
+The aim of this package is, on the one hand, to provide the used code in the article Martina et al. (2026), on the other hand, to faciliate the use of the FLEXPART-WRF model to investigate the potential transport of tracers from the surface to the stratosphere.
 
 **Herafter, a summary of the main changes is reported.**
 *****************************************************************************
