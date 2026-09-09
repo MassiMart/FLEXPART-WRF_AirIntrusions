@@ -160,3 +160,6 @@ This subroutine is an helper subroutine to dynamically allocate arrays. Specific
 
 ### Acknowledgements. 
 All authors were supported by GAČR project "Unravelling Subgrid-Scale Orography Effects on Composition in the Free Atmosphere (SCOPE)", 25-17683S in the final year of the study. Massimo Martina, Petr Šácha were supported by the JUNIOR STAR project n. 23-04921M “Unravelling climate impacts of atmospheric internal gravity waves” as well as Anahí Villalba Pradas in initial years of the study. Petr Šácha was also partly supported by the Charles University Research Centre program no. UNCE/24/SCI/005 and Massimo Martina by the GAUK project n°442325.
+
+### DOI
+10.5281/zenodo.22668508
